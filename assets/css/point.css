@@ -1,15 +1,15 @@
 .bubbles
 {
-    position: relative;
+    position: fixed;
     display: flex;
 }
 
 .bubbles span
 {
     position: relative;
-    width: 30px;
-    height: 30px;
     background: #4fc3dc;
+    width: 20px;
+    height: 20px;
     margin: 0 4px;
     border-radius: 50%;
     box-shadow: 0 0 0 10px #4fc3dc44,
