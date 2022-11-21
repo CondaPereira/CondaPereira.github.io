@@ -6,7 +6,7 @@
 -->
 <html lang="en">
 	<head>
-		<title>Generic Page - Massively by HTML5 UP</title>
+		<title>Zekai Pereira Shen | Software Tutorials</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -103,7 +103,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Massively</a>
+						<a href="index.html" class="logo">Rosetta</a>
 					</header>
 
 				<!-- Nav -->
@@ -127,16 +127,71 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h1>This is a<br />
-									Generic Page</h1>
-									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-									amet nullam sed etiam veroeros.</p>
+									<span class="date">November 21, 2022</span>
+									<h1>Rosetta<br />
+									Scripts Basis</h1>
+									<p>This is a outline tutorial about rosetta scripts which will contain<br />
+									some modules such as Minimization, Packing, Filter and so on, and we can use<br />
+									the Filter module to evaluate the properties of structures and manage the working progress.</p>
 								</header>
-								<div class="image main"><img src="images/pic01.jpg" alt="" /></div>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
+								<div class="image main"><img src="images/rosetta.png" alt="" /></div>
+								<h2>1.Inuput file formation</h2>
+								<p>Before you use the rosetta scripts to design a protein, you can use the command below to generate a template scripts:</p>
+								<pre><code>
+rosetta_scripts.graphicsmpi.linuxgccrelease > Temp.xml
+# you can use compile the graphics version to view the protein optimization progress
+								</code></pre>
+								<p>and then you can get a template scripts just like this as follows:</p>
+								<pre><code>
+&lt;ROSETTASCRIPTS&gt;
+	&lt;SCOREFXNS&gt;
+	&lt;/SCOREFXNS&gt;
+	&lt;RESIDUE_SELECTORS&gt;
+	&lt;/RESIDUE_SELECTORS&gt;
+	&lt;PACKER_PALETTES&gt;
+	&lt;/PACKER_PALETTES&gt;
+	&lt;TASKOPERATIONS&gt;
+	&lt;/TASKOPERATIONS&gt;
+	&lt;MOVE_MAP_FACTORIES&gt;
+	&lt;/MOVE_MAP_FACTORIES&gt;
+	&lt;SIMPLE_METRICS&gt;
+	&lt;/SIMPLE_METRICS&gt;
+	&lt;FILTERS&gt;
+	&lt;/FILTERS&gt;
+	&lt;MOVERS&gt;
+	&lt;/MOVERS&gt;
+	&lt;PROTOCOLS&gt;
+	&lt;/PROTOCOLS&gt;
+	&lt;OUTPUT /&gt;
+&lt;/ROSETTASCRIPTS&gt;
+								</code></pre>
+								<p>and we can find that the style format <b>"ROSETTA-SCRIPTS/ROSETTA-SCRIPTS"</b> is equal to the format <b>"ROSETTA-SCRIPTS PLUS CONTENTS"</b>, and the title of every part or section will not be under analysis, if you'd written some scripts about improving some aspects of the protein such as the side chain or repair the loop structure. and then we can choose the output score function results just use the commands below:</p>
+								<pre><code>
+&lt;OUTPUT scorefxn=&quot;r15&quot;&gt;
+# and the scorefuntion which will include molechem(inside evalution) or ref2015(which i think is too old).
+								</code></pre>
+								<p>if you want to call the <b>molchem</b> or <b>ref2015</b> score function module, you should define the concepts before the location of the <b>&lt;OUTPUT /&gt;</b> in the <b>&lt;SCOREFXNS /&gt;</b> , just like follows:</p>
+								<pre><code>
+...
+&lt;ScoreFunction name=&quot;molmech&quot; weights=&quot;mm_std_fa_elec_dslf_fa13&quot; /&gt;
+        &lt;ScoreFunction name=&quot;r15_cart&quot; weights=&quot;ref2015&quot; &gt;
+            &lt;Reweight scoretype=&quot;pro_close&quot; weight=&quot;0.0&quot; /&gt;
+            &lt;Reweight scoretype=&quot;cart_bonded&quot; weight=&quot;0.625&quot; /&gt;
+        &lt;/ScoreFunction&gt;
+&lt;/ScoreFunction&gt;
+...
+...
+&lt;OUTPUT scorefxn=&quot;r15_cart&quot; /&gt;
+# and two kind of the scorefunction cannot exist in the same time, so you'd better choose a valid scorefunction for a certain protein system.
+&lt;OUTPUT scorefxn=&quot;molmech&quot; /&gt;
+...
+								</code></pre>
+								<p>and you can point out how many protein structures you want to generate once or view the protein structure optimization progress, commonly, you can run this command below:</p>
+								<pre><code>
+mpirun -np 8 rosetta_scripts.graphicsmpi.linuxgccrelease -s 1ubq.pdb -parser:protocol scoring.xml -parser:view -out:prefix scoring_r15_(or scoring_molmech_)
+								</code></pre>
+								<h2>2.Movers and Structures Optimization</h2>
+								<p>MOVERS is the main body of the XML script, which can change the structure from multiple aspects, such as <b>atomic coordinates</b>, <b>Foldtree</b>, <b>restricted conditions</b>, <b>sequences</b> or <b>covalent connections</b>. Next, i will introduce the minimization module, packing module, and trRosettaProtocol module.</p>
 							</section>
 							<footer>
 								<div class="pagination">
