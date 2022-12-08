@@ -4696,7 +4696,7 @@ body .footer {
 	display: grid;
 	position: relative;
 	grid-area: footer;
-	min-height: 12rem;
+	min-height: 11rem;
 }
 body .footer .bubbles {
 	position: absolute;
@@ -4711,7 +4711,7 @@ body .footer .bubbles .bubble {
 	position: absolute;
 	left: var(--position, 50%);
 	background: var(--footer-background);
-	border-radius: 100%;
+	border-radius: initial;
 	-webkit-animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
 	animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
 	transform: translate(-50%, 100%);
