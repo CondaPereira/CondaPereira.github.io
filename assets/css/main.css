@@ -4736,7 +4736,7 @@ body .footer .content p {
 	font-size: 0.75rem;
 }
 body .footer .content > div {
-	display: flex;
+	display: -webkit-flex;
 	flex-direction: column;
 	justify-content: center;
 }
